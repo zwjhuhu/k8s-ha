@@ -12,11 +12,21 @@ done
 echo "ovnnb="${ovnnb:1} > ovn.conf
 echo "ovnsb="${ovnsb:1} >> ovn.conf
 
+leader=""
+cmd=""
+
 for ip in `cat hosts | grep -B 100 "kube-node" | grep -A 100 kube-master | awk '{if($0!="")print}' | grep ^[^#] | grep ^[^[]`
 do
-  name=$(cat /etc/hosts | grep $ip | awk '{print$2}')
   echo "------Master $name------"
-  cmd="--db-nb-addr=$ip --db-nb-create-insecure-remote=yes --db-sb-addr=$ip --db-sb-create-insecure-remote=yes --db-nb-cluster-local-addr=$ip --db-sb-cluster-local-addr=$ip --ovn-northd-nb-db=${ovnnb:1} --ovn-northd-sb-db=${ovnsb:1}"
+  if [[ -z $leader ]]
+  then
+    leader=$ip
+    cmd="--db-nb-addr=$ip --db-nb-create-insecure-remote=yes --db-sb-addr=$ip --db-sb-create-insecure-remote=yes --db-nb-cluster-local-addr=$ip --db-sb-cluster-local-addr=$ip --ovn-northd-nb-db=${ovnnb:1} --ovn-northd-sb-db=${ovnsb:1}"
+  else  
+    cmd="--db-nb-addr=$ip --db-nb-create-insecure-remote=yes --db-sb-addr=$ip --db-sb-create-insecure-remote=yes --db-nb-cluster-local-addr=$ip --db-sb-cluster-local-addr=$ip --ovn-northd-nb-db=${ovnnb:1} --ovn-northd-sb-db=${ovnsb:1} --db-nb-cluster-remote-addr=$leader --db-sb-cluster-remote-addr=$leader"
+  fi
+  
+  name=$(cat /etc/hosts | grep $ip | awk '{print$2}')
   rm -f $name.sdb
   cp systemctl/ovn-ovsdb.service $name.sdb
   sed -i "s/CMD/$cmd/g" $name.sdb

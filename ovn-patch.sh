@@ -40,7 +40,7 @@ do
   scp $name.ndb $name:/usr/lib/systemd/system/ovn-northd.service
 
   rm -f $name.cc
-  cp systemctl/ovn-northd.service $name.cc
+  cp systemctl/ovn-controller.service $name.cc
   sed -i "s/CMD/$cmd/g" $name.cc
   echo "scp $name.cc $name:/usr/lib/systemd/system/ovn-controller.service"
   scp $name.cc $name:/usr/lib/systemd/system/ovn-controller.service

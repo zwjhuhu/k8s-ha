@@ -23,7 +23,7 @@ Requires=ovsdb-server.service
 Type=forking
 Restart=on-failure
 EnvironmentFile=-/etc/sysconfig/ovn-ovsdb
-ExecStart=/usr/share/openvswitch/scripts/ovn-ctl CMD start_northd
+ExecStart=/usr/share/openvswitch/scripts/ovn-ctl CMD start_ovsdb
 ExecStop=/usr/share/openvswitch/scripts/ovn-ctl stop_ovsdb
 
 [Install]

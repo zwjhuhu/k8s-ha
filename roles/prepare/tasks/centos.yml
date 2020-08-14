@@ -1,3 +1,4 @@
+# required by openvswitch-ovn-* so do not remove
 - name: 删除centos/redhat默认安装
   shell: "yum remove -y {{ item }}"
   with_items:
@@ -7,6 +8,7 @@
   args:
       warn: false
   ignore_errors: true
+  when: 'INSTALL_SOURCE != "custom"'
 
 #- name: 添加EPEL仓库
 #  yum: name=epel-release state=present
@@ -29,7 +31,7 @@
       - rsync               # 文件同步工具，分发证书等配置文件需要
       - socat               # 用于port forwarding
     state: present
-  when: 'INSTALL_SOURCE != "offline"'
+  when: 'INSTALL_SOURCE == "online"'
 
 # 离线安装基础软件包
 - import_tasks: offline.yml

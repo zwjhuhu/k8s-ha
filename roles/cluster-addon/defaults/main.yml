@@ -14,13 +14,13 @@ dns_offline: "{%- if dns_backend == 'coredns' -%} \
               {%- endif -%}"
 
 # metric server 自动安装
-metricsserver_install: "yes"
+metricsserver_install: "no"
 metricsVer: "v0.3.6"
 metricsserver_offline: "metrics-server_{{ metricsVer }}.tar"
 
 # dashboard 自动安装
 # dashboard v2.x.x 不依赖于heapster
-dashboard_install: "yes"
+dashboard_install: "no"
 dashboardVer: "v2.0.1"
 dashboard_offline: "dashboard_{{ dashboardVer }}.tar"
 dashboardMetricsScraperVer: "v1.0.4"

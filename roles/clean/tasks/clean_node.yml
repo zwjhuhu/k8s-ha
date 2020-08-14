@@ -57,7 +57,7 @@
           - "/etc/bash_completion.d/docker"
           - "/usr/bin/docker"
         when: "'kubeasz' not in install_info.stdout"
-    when: CONTAINER_RUNTIME == 'docker'
+    when: CONTAINER_RUNTIME == 'dummy'
 
   - block:
       - name: stop and disable containerd service

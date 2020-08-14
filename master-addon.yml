@@ -1,0 +1,5 @@
+# to install clust-addons
+- hosts:
+  - kube-master
+  roles:
+  - cluster-addon

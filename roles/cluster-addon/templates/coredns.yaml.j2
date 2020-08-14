@@ -97,7 +97,7 @@ spec:
         - key: "CriticalAddonsOnly"
           operator: "Exists"
       nodeSelector:
-        beta.kubernetes.io/os: linux
+        kubernetes.io/role: master
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:

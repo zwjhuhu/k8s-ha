@@ -52,6 +52,10 @@
   - kube-master
   roles:
   - cluster-addon
+  tasks:
+  - name: apply calico yaml again
+    shell: "{{ bin_dir }}/kubectl apply -f /opt/kube/kube-system/calico.yaml"
+    run_once: true
 
 # to install kube-node-plus
 - hosts:

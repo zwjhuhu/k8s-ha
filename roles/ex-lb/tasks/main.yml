@@ -1,7 +1,8 @@
 # ex-lb 节点成员不能同时是 kube-node 节点，因为它们都需要安装 haproxy
-- name: fail info1
-  fail: msg="an 'ex-lb' node CAN NOT be a 'kube-node' node at the same time"
-  when: "inventory_hostname in groups['kube-node']"
+# use master side haproxy
+#- name: fail info1
+#  fail: msg="an 'ex-lb' node CAN NOT be a 'kube-node' node at the same time"
+#  when: "inventory_hostname in groups['kube-node']"
 
 # 自动设置LB节点变量'LB_IF'
 - name: 注册变量 LB_IF_TMP
@@ -38,7 +39,7 @@
   with_items:
   - haproxy
   - keepalived
-  when: 'INSTALL_SOURCE != "offline"'
+  when: 'INSTALL_SOURCE == "online"'
   ignore_errors: true
 
 # 离线安装 haproxy+keepalived

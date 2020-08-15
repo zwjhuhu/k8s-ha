@@ -15,3 +15,6 @@ DEL_CHRONY: "no"
 
 # 是否删除 kubeasz 环境变量
 DEL_ENV: "no"
+
+# 是否删除 kube-node-plus 的配置
+DEL_NODE_PLUS: "no"

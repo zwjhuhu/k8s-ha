@@ -1,4 +1,7 @@
 # master task 
+- name: copy kubernetes token
+  copy: src=/root/.kube/config dest=/etc/kubernetes/admin.conf
+
 - name: deploy kubernetes custom resources
   shell: "{{ bin_dir }}/kubectl apply -f  {{ KUBEVMM_DIR }}/yamls/cloudplus"
 

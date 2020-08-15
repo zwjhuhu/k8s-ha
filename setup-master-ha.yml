@@ -53,6 +53,12 @@
   roles:
   - cluster-addon
 
+# to install ex-lb
+- hosts:
+  - ex-lb
+  roles:
+  - ex-lb
+
 # to install kube-node-plus
 - hosts:
   - kube-master

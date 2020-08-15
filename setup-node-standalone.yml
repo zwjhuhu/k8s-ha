@@ -26,3 +26,8 @@
   - { role: kube-router, when: "CLUSTER_NETWORK == 'kube-router' and inventory_hostname not in groups['kube-master']" }
   - { role: kube-ovn, when: "CLUSTER_NETWORK == 'kube-ovn' and inventory_hostname not in groups['kube-master']" }
 
+#to install kube-node-plus
+- hosts:
+  - kube-node
+  roles:
+  - kube-node-plus

@@ -14,6 +14,9 @@
 - import_tasks: clean_chrony.yml
   when: 'DEL_CHRONY == "yes"'
 
+- import_tasks: clean_node_plus.yml
+  when: 'DEL_NODE_PLUS == "yes"'
+
 - name: clean 'ENV PATH'
   lineinfile:
     dest: ~/.bashrc

@@ -6,17 +6,15 @@
   copy: src=ovn-controller.service dest=/usr/lib/systemd/system/ovn-controller.service
   tags: restart_ovn
 
-- name: restart ovs ovn-controller service
-  shell: "systemctl daemon-reload && systemctl restart openvswitch && \
-	systemctl restart ovn-controller"
+- name: start openvswitch service
+  service: name=openvswitch enabled=yes state=started
   tags: restart_ovn
 
-- name: enable ovs ovn-controller service
-  shell: "systemctl enable openvswitch && systemctl enable ovn-controller"
-  ignore_errors: true
+- name: restart ovn-controller service
+  service: name=ovn-controller enabled=yes state=restarted
   tags: restart_ovn
 
 - name: set ovn-contoller params
-  shell: "/etc/ansible/ovn-node.sh {{ inventory_hostname }}"
+  shell: "/bin/bash /etc/ansible/ovn-node.sh {{ inventory_hostname }}"
   tags: restart_ovn
 

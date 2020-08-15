@@ -1,0 +1,17 @@
+# to clean 'kube-node-plus'
+- name: stop and disable ovs ovn service
+  service: name={{ item }} state=stopped enabled=no
+  with_items:
+  - ovn-controller
+  - ovn-northd
+  - ovn-ovsdb
+  - openvswitch
+  ignore_errors: true
+
+- name: remove files 'kube-node-plus'
+  file: name={{ item }} state=absent
+  with_items:
+  - "/etc/ovn.conf"
+  - "/usr/lib/systemd/system/ovn-ovsdb.service"
+  - "/usr/lib/systemd/system/ovn-northd.service"
+  - "/usr/lib/systemd/system/ovn-controller.service"

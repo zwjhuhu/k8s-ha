@@ -17,28 +17,28 @@
 Description=OVN ovsdb daemon
 After=syslog.target
 Requires=openvswitch.service
-Requires=ovsdb-server.service
+After=openvswitch.service
 
 [Service]
 Type=forking
-Restart=on-failure
+Restart=always
 EnvironmentFile=-/etc/sysconfig/ovn-ovsdb
 ExecStart=/usr/share/openvswitch/scripts/ovn-ctl \
---db-nb-addr={{ inventory_hostname }} \
---db-sb-addr={{ inventory_hostname }} \
-{%- if groups['kube-master']|length > 1 -%}
---db-nb-cluster-local-addr={{ inventory_hostname }} \
---db-sb-cluster-local-addr={{ inventory_hostname }} \
-{%- endif -%}
---ovn-northd-nb-db={{ OVN_NB_DBS }} \
---ovn-northd-sb-db={{ OVN_SB_DBS }} \
-{%- if inventory_hostname != groups['kube-master'][0] -%}
---db-nb-cluster-remote-addr={{ OVN_LEADER }} \
---db-sb-cluster-remote-addr={{ OVN_LEADER }} \
-{%- endif -%}
---db-nb-create-insecure-remote=yes \
---db-sb-create-insecure-remote=yes \
-start_ovsdb
+  --db-nb-addr={{ inventory_hostname }} \
+  --db-sb-addr={{ inventory_hostname }} \
+{% if groups['kube-master']|length > 1 %}
+  --db-nb-cluster-local-addr={{ inventory_hostname }} \
+  --db-sb-cluster-local-addr={{ inventory_hostname }} \
+{% endif %}
+  --ovn-northd-nb-db={{ OVN_NB_DBS }} \
+  --ovn-northd-sb-db={{ OVN_SB_DBS }} \
+{% if inventory_hostname != groups['kube-master'][0] %}
+  --db-nb-cluster-remote-addr={{ OVN_LEADER }} \
+  --db-sb-cluster-remote-addr={{ OVN_LEADER }} \
+{% endif %}
+  --db-nb-create-insecure-remote=yes \
+  --db-sb-create-insecure-remote=yes \
+  start_ovsdb
 ExecStop=/usr/share/openvswitch/scripts/ovn-ctl stop_ovsdb
 
 [Install]

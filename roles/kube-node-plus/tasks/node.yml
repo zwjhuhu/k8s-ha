@@ -2,7 +2,7 @@
 - name: add vm node
   shell: "{{ bin_dir }}/kubectl apply -f  {{ KUBEVMM_DIR }}/yamls/cloudplus/node.yaml"
 
-- name: copy  ovn-controller service file
+- name: copy ovn-controller service file
   copy: src=ovn-controller.service dest=/usr/lib/systemd/system/ovn-controller.service
   tags: restart_ovn
 
@@ -17,6 +17,6 @@
   tags: restart_ovn
 
 - name: set ovn-contoller params
-  shell: "bash /etc/ansbile/ovn-node.sh {{ inventory_hostname }}"
+  shell: "/etc/ansible/ovn-node.sh {{ inventory_hostname }}"
   tags: restart_ovn
 

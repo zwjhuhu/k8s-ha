@@ -16,7 +16,7 @@
   roles:
   - { role: kube-only-node, when: "inventory_hostname not in groups['kube-master']" }
 
-# to install network plugin, only one can be choosen
+# to install network plugin, only one can be choosen master deal yaml so just create some file
 - hosts:
   - kube-node
   roles:
@@ -25,3 +25,4 @@
   - { role: flannel, when: "CLUSTER_NETWORK == 'flannel' and inventory_hostname not in groups['kube-master']" }
   - { role: kube-router, when: "CLUSTER_NETWORK == 'kube-router' and inventory_hostname not in groups['kube-master']" }
   - { role: kube-ovn, when: "CLUSTER_NETWORK == 'kube-ovn' and inventory_hostname not in groups['kube-master']" }
+

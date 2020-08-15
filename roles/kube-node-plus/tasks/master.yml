@@ -1,0 +1,31 @@
+# master task 
+- name: deploy kubernetes custom resources
+  shell: "{{ bin_dir }}/kubectl apply -f  {{ KUBEVMM_DIR }}/yamls/cloudplus"
+
+- name: prepare ovn-ovsdb.service config
+  template: src=ovn-ovsdb.service.j2 dest=/usr/lib/systetmd/system/ovn-ovsdb.service
+  tags: restart_ovn
+
+- name: prepare ovn-northd.service config
+  template: src=ovn-northd.service.j2 dest=/usr/lib/systetmd/system/ovn-northd.service
+  tags: restart_ovn
+
+- name: copy ovn-controller service file
+  copy: src=ovn-controller.service dest=/usr/lib/systemd/system/ovn-controller.service
+  tags: restart_ovn
+
+- name: restart ovs ovn service
+  shell: "systemctl daemon-reload && systemctl restart openvswitch && \
+	 systemctl restart ovn-ovsdb && systemctl restart ovn-northd && \
+         systemctl restart ovn-controller"
+  tags: restart_ovn
+
+- name: enable ovs ovnr service
+  shell: "systemctl enable openvswitch && systemctl enable ovn-ovsdb &&\
+         systemctl restart ovn-northd && systemctl restart ovn-controller"
+  ignore_errors: true
+  tags: restart_ovn
+
+- name: set ovn-contoller params
+  shell: "bash /etc/ansbile/ovn-master.sh {{ inventory_hostname }}"
+  tags: restart_ovn

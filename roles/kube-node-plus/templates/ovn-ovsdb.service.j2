@@ -1,0 +1,45 @@
+# See ovn-controller(8) for details about ovn-controller.
+#
+# To customize the ovn-controller service, you may create a configuration file
+# in the /etc/systemd/system/ovn-controller.d/ directory.  For example, to specify
+# additional options to be passed to the "ovn-ctl start_controller" command, you
+# could place the following contents in
+# /etc/systemd/system/ovn-controller.d/local.conf:
+#
+#   [System]
+#   Environment="OVN_CONTROLLER_OPTS=--ovn-controller-log=-vconsole:emer -vsyslog:err -vfile:info"
+#
+# Alternatively, you may specify environment variables in the file /etc/sysconfig/ovn-controller:
+#
+#   OVN_CONTROLLER_OPTS="--ovn-controller-log=-vconsole:emer -vsyslog:err -vfile:info"
+
+[Unit]
+Description=OVN ovsdb daemon
+After=syslog.target
+Requires=openvswitch.service
+Requires=ovsdb-server.service
+
+[Service]
+Type=forking
+Restart=on-failure
+EnvironmentFile=-/etc/sysconfig/ovn-ovsdb
+ExecStart=/usr/share/openvswitch/scripts/ovn-ctl \
+--db-nb-addr={{ inventory_hostname }} \
+--db-sb-addr={{ inventory_hostname }} \
+{%- if groups['kube-master']|length > 1 -%}
+--db-nb-cluster-local-addr={{ inventory_hostname }} \
+--db-sb-cluster-local-addr={{ inventory_hostname }} \
+{%- endif -%}
+--ovn-northd-nb-db={{ OVN_NB_DBS }} \
+--ovn-northd-sb-db={{ OVN_SB_DBS }} \
+{%- if inventory_hostname != groups['kube-master'][0] -%}
+--db-nb-cluster-remote-addr={{ OVN_LEADER }} \
+--db-sb-cluster-remote-addr={{ OVN_LEADER }} \
+{%- endif -%}
+--db-nb-create-insecure-remote=yes \
+--db-sb-create-insecure-remote=yes \
+start_ovsdb
+ExecStop=/usr/share/openvswitch/scripts/ovn-ctl stop_ovsdb
+
+[Install]
+WantedBy=multi-user.target

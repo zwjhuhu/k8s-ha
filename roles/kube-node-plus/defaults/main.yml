@@ -1,0 +1,9 @@
+# kubevmm dir
+KUBEVMM_DIR: "/etc/kubevmm"
+
+# ovn cluster dbs
+TMP_NBS: "{% for h in groups['kube-master'] %}tcp:{{ h }}:6641,{% endfor %}"
+TMP_SBS: "{% for h in groups['kube-master'] %}tcp:{{ h }}:6642,{% endfor %}"
+OVN_NB_DBS: "{{ TMP_NBS.rstrip(',') }}"
+OVN_SB_DBS: "{{ TMP_SBS.rstrip(',') }}"
+OVN_LEADER: "{{ groups['kube-master'][0] }}"

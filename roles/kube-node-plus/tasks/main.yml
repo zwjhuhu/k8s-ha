@@ -1,0 +1,10 @@
+# node yaml and ovn settings
+
+- name: prepare ovn.conf
+  template: src=ovn.conf.j2 dest=/etc/ovn.conf
+
+- import_tasks: master.yml
+  when: "inventory_hostname in groups['kube-master']"
+
+- import_tasks: node.yml
+  when: 'inventory_hostname in groups['kube-node'] and inventory_hostname not in groups['kube-master']" 

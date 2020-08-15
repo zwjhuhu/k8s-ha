@@ -1,0 +1,27 @@
+# [optional] to synchronize time of nodes with 'chrony'
+- hosts:
+  - kube-node
+  - chrony
+  roles:
+  - { role: chrony, when: "groups['chrony']|length > 0" }
+
+# prepare tasks for all nodes
+- hosts:
+  - kube-node
+  roles:
+  - { role: prepare, when: "inventory_hostname not in groups['kube-master']" }
+
+# to set up 'kube-node' nodes
+- hosts: kube-node
+  roles:
+  - { role: kube-only-node, when: "inventory_hostname not in groups['kube-master']" }
+
+# to install network plugin, only one can be choosen
+- hosts:
+  - kube-node
+  roles:
+  - { role: calico-only-node, when: "CLUSTER_NETWORK == 'calico' and inventory_hostname not in groups['kube-master']" }
+  - { role: cilium, when: "CLUSTER_NETWORK == 'cilium' and inventory_hostname not in groups['kube-master']" }
+  - { role: flannel, when: "CLUSTER_NETWORK == 'flannel' and inventory_hostname not in groups['kube-master']" }
+  - { role: kube-router, when: "CLUSTER_NETWORK == 'kube-router' and inventory_hostname not in groups['kube-master']" }
+  - { role: kube-ovn, when: "CLUSTER_NETWORK == 'kube-ovn' and inventory_hostname not in groups['kube-master']" }

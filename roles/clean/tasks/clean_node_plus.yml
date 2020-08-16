@@ -14,6 +14,7 @@
   - "/etc/ovn.conf"
   - "/usr/lib/systemd/system/ovn-ovsdb.service"
   - "/usr/lib/systemd/system/ovn-northd.service"
+  - "/usr/lib/systemd/system/ovn-controller.service"
   - "/etc/openvswitch/conf.db"
   - "/etc/openvswitch/ovnnb_db.db"
   - "/etc/openvswitch/ovnsb_db.db"

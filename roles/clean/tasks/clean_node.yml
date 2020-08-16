@@ -100,10 +100,10 @@
     - "/var/lib/kube-router/"
     - "/opt/kube/kube-ovn/"
     - "/opt/kube/kube-system/"
-    - "/var/run/openvswitch/"
-    - "/etc/origin/openvswitch/"
-    - "/etc/openvswitch/"
-    - "/var/log/openvswitch/"
+#    - "/var/run/openvswitch/"
+#    - "/etc/origin/openvswitch/"
+#    - "/etc/openvswitch/"
+#    - "/var/log/openvswitch/"
 
 #  - name: cleanup networks1
 #    shell: "ip link del tunl0; \

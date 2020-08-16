@@ -3,7 +3,12 @@
   copy: src=/root/.kube/config dest=/etc/kubernetes/admin.conf
 
 - name: deploy kubernetes custom resources
-  shell: "{{ bin_dir }}/kubectl apply -f  {{ KUBEVMM_DIR }}/yamls/cloudplus"
+  shell: "{{ bin_dir }}/kubectl apply -f  {{ KUBEVMM_DIR }}/yamls/cloudplus/kubevirt*.yaml"
+  ignore_errors: true
+  
+- name: deploy grafana
+  shell: "{{ bin_dir }}/kubectl apply -f  {{ KUBEVMM_DIR }}/yamls/cloudplus/grafana.yaml"
+  ignore_errors: true
 
 - name: prepare ovn-ovsdb.service config
   template: src=ovn-ovsdb.service.j2 dest=/usr/lib/systemd/system/ovn-ovsdb.service

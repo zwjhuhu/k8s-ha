@@ -54,7 +54,7 @@
   tags: upgrade_k8s, restart_node
 
 - name: 创建kubelet的systemd unit文件
-  template: src=kubelet.service.j2 dest=/etc/systemd/system/kubelet.service
+  template: src=kubelet.service.j2 dest=/usr/lib/systemd/system/kubelet.service
   tags: upgrade_k8s, restart_node
 
 - name: 开机启用kubelet 服务
@@ -74,7 +74,7 @@
     line: "    server: {{ KUBE_APISERVER }}"
 
 - name: 创建kube-proxy 服务文件
-  template: src=kube-proxy.service.j2 dest=/etc/systemd/system/kube-proxy.service
+  template: src=kube-proxy.service.j2 dest=/usr/lib/systemd/system/kube-proxy.service
   tags: reload-kube-proxy, restart_node, upgrade_k8s
 
 - name: 开机启用kube-proxy 服务

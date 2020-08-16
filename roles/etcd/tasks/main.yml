@@ -31,7 +31,7 @@
         -profile=kubernetes etcd-csr.json | {{ bin_dir }}/cfssljson -bare etcd"
 
 - name: 创建etcd的systemd unit文件
-  template: src=etcd.service.j2 dest=/etc/systemd/system/etcd.service
+  template: src=etcd.service.j2 dest=/usr/lib/systemd/system/etcd.service
   tags: upgrade_etcd
 
 - name: 开机启用etcd服务

@@ -18,8 +18,8 @@
     with_items:
     - "/var/lib/kubelet/"
     - "/var/lib/kube-proxy/"
-    - "/etc/systemd/system/kubelet.service"
-    - "/etc/systemd/system/kube-proxy.service"
+    - "/usr/lib/systemd/system/kubelet.service"
+    - "/usr/lib/systemd/system/kube-proxy.service"
     - "/opt/kube/kube-system/"
     - "/etc/kubernetes/"
     - "/root/.kube/config"

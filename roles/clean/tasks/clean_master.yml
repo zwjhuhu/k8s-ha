@@ -12,7 +12,7 @@
   file: name={{ item }} state=absent
   with_items:
   - "/var/run/kubernetes"
-  - "/etc/systemd/system/kube-apiserver.service"
-  - "/etc/systemd/system/kube-controller-manager.service"
-  - "/etc/systemd/system/kube-scheduler.service"
+  - "/usr/lib/systemd/system/kube-apiserver.service"
+  - "/usr/lib/systemd/system/kube-controller-manager.service"
+  - "/usr/lib/systemd/system/kube-scheduler.service"
   when: "inventory_hostname in groups['kube-master']"

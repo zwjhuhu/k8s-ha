@@ -18,3 +18,11 @@
   - "/etc/openvswitch/conf.db"
   - "/etc/openvswitch/ovnnb_db.db"
   - "/etc/openvswitch/ovnsb_db.db"
+  
+- name: stop kubevmm
+  shell: "/usr/bin/kubevmm-adm service stop"
+  ignore_errors: true
+
+- name: stop host-agent
+  shell: "/usr/sbin/host-agent-ctl stop"
+  ignore_errors: true

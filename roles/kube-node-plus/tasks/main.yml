@@ -2,7 +2,13 @@
 
 - name: prepare ovn.conf
   template: src=ovn.conf.j2 dest=/etc/ovn.conf
-
+  
+- name: copy ovn sh
+  copy: src={{ item }} dest=/etc/ansible/{{ item }}
+  with_items:
+  - "ovn-master.sh"
+  - "ovn-node.sh"
+  
 - import_tasks: master.yml
   when: "inventory_hostname in groups['kube-master']"
 

@@ -11,6 +11,10 @@
   shell: "{{ bin_dir }}/kubectl apply -f  {{ KUBEVMM_DIR }}/monitor/grafana.yaml"
   ignore_errors: true
   run_once: true
+  
+- name: prepare ovn.conf
+  template: src=ovn.conf.j2 dest=/etc/ovn.conf
+  tags: restart_ovn
 
 - name: prepare ovn-ovsdb.service config
   template: src=ovn-ovsdb.service.j2 dest=/usr/lib/systemd/system/ovn-ovsdb.service

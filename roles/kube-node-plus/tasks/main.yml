@@ -1,7 +1,4 @@
 # node yaml and ovn settings
-
-- name: prepare ovn.conf
-  template: src=ovn.conf.j2 dest=/etc/ovn.conf
   
 - name: copy ovn sh
   copy: src={{ item }} dest=/etc/ansible/{{ item }}

@@ -10,11 +10,10 @@
   service: name=openvswitch enabled=yes state=started
   tags: restart_ovn
 
-- name: restart ovn-controller service
-  service: name=ovn-controller enabled=yes state=restarted
-  tags: restart_ovn
-
 - name: set ovn-contoller params
   shell: "/bin/bash /etc/ansible/ovn-node.sh {{ inventory_hostname }}"
   tags: restart_ovn
 
+- name: restart ovn-controller service
+  service: name=ovn-controller enabled=yes state=restarted
+  tags: restart_ovn

@@ -44,10 +44,10 @@
   service: name=ovn-northd enabled=yes state=restarted
   tags: restart_ovn
 
-- name: restart ovn-controller service
-  service: name=ovn-controller enabled=yes state=restarted
-  tags: restart_ovn
-
 - name: set ovn-contoller params
   shell: "/bin/bash /etc/ansible/ovn-master.sh {{ inventory_hostname }}"
+  tags: restart_ovn
+
+- name: restart ovn-controller service
+  service: name=ovn-controller enabled=yes state=restarted
   tags: restart_ovn

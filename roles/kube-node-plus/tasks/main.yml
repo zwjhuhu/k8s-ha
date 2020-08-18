@@ -13,5 +13,5 @@
   when: "inventory_hostname in groups['kube-node'] and inventory_hostname not in groups['kube-master']" 
 
 - name: kubectl 软链接
-  file: src={{ base_dir }}/bin/kubectl dest=/usr/bin/kubectl state=link
+  file: src={{ bin_dir }}/bin/kubectl dest=/usr/bin/kubectl state=link
   ignore_errors: true

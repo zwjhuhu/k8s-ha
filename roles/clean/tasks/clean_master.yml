@@ -15,4 +15,5 @@
   - "/usr/lib/systemd/system/kube-apiserver.service"
   - "/usr/lib/systemd/system/kube-controller-manager.service"
   - "/usr/lib/systemd/system/kube-scheduler.service"
+  - "/etc/ansible/.cluster"
   when: "inventory_hostname in groups['kube-master']"

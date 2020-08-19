@@ -3,12 +3,19 @@
   copy: src=/root/.kube/config dest=/etc/kubernetes/admin.conf
 
 - name: deploy kubernetes custom resources
-  shell: "{{ bin_dir }}/kubectl apply -f  {{ KUBEVMM_DIR }}/yamls/cloudplus"
+  shell: "{{ bin_dir }}/kubectl apply -f  {{ base_dir }}/yamls/{{ item }}"
+  with_items:
+  - "kubevirtANamespace.yaml"
+  - "kubevirtController.yaml"
+  - "kubevirtExportor.yaml"
+  - "kubevirtPrometheus.yaml"
+  - "kubevirtResource.yaml"
+  - "grafana.yaml"
   ignore_errors: true
   run_once: true
   
 - name: deploy grafana
-  shell: "{{ bin_dir }}/kubectl apply -f  {{ KUBEVMM_DIR }}/monitor/grafana.yaml"
+  shell: "{{ bin_dir }}/kubectl apply -f  {{ base_dir }}/monitor/grafana.yaml"
   ignore_errors: true
   run_once: true
   

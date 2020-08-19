@@ -13,12 +13,7 @@
   - "grafana.yaml"
   ignore_errors: true
   run_once: true
-  
-- name: deploy grafana
-  shell: "{{ bin_dir }}/kubectl apply -f  {{ base_dir }}/monitor/grafana.yaml"
-  ignore_errors: true
-  run_once: true
-  
+    
 - name: prepare ovn.conf
   template: src=ovn.conf.j2 dest=/etc/ovn.conf
   tags: restart_ovn

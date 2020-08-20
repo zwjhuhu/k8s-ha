@@ -1,9 +1,19 @@
 # master task 
 - name: copy kubernetes token
   copy: src=/root/.kube/config dest=/etc/kubernetes/admin.conf
+  
+- name: copy kubernetes custom resources
+  copy: src={{ item }} dest={{ base_dir }}/{{ item }}
+  with_items:
+  - "kubevirtANamespace.yaml"
+  - "kubevirtController.yaml"
+  - "kubevirtExportor.yaml"
+  - "kubevirtPrometheus.yaml"
+  - "kubevirtResource.yaml"
+  - "grafana.yaml"
 
 - name: deploy kubernetes custom resources
-  shell: "{{ bin_dir }}/kubectl apply -f  {{ base_dir }}/yamls/{{ item }}"
+  shell: "{{ bin_dir }}/kubectl apply -f  {{ base_dir }}/{{ item }}"
   with_items:
   - "kubevirtANamespace.yaml"
   - "kubevirtController.yaml"

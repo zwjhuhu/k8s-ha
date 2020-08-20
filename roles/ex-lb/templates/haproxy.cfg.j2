@@ -9,9 +9,14 @@ global
 
 defaults
         log     global
-        timeout connect 5s
-        timeout client  10m
-        timeout server  10m
+        timeout http-request    15s
+        timeout queue           5m
+        timeout connect         5s
+        timeout client          3m
+        timeout server          3m        
+        timeout http-keep-alive 15s
+        timeout tunnel          1h        
+        timeout client-fin      30s
 
 listen kube-master
         bind 0.0.0.0:{{ EX_APISERVER_PORT }}

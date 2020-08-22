@@ -18,6 +18,7 @@
 - name: prepare some dirs
   file: name={{ item }} state=directory
   with_items:
+  - "{{ base_dir }}"
   - "{{ bin_dir }}"
   - "{{ ca_dir }}"
   - /root/.kube

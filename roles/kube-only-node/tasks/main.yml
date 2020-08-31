@@ -107,7 +107,7 @@
   ignore_errors: true
   
 - name: 设置node-exportor label
-  shell: "{{ bin_dir }}/kubectl label node {{ inventory_hostname }} cloudplus.node.exportor="
+  shell: "{{ bin_dir }}/kubectl label node {{ inventory_hostname }} cloudplus/node.exportor="
   ignore_errors: true
   
 - name: 设置virt-tool label

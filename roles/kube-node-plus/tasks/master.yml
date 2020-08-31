@@ -10,6 +10,7 @@
   - "kubevirtExportor.yaml"
   - "kubevirtPrometheus.yaml"
   - "kubevirtResource.yaml"
+  - "virt-tool.yaml"
   - "grafana.yaml"
 
 - name: deploy kubernetes custom resources
@@ -20,6 +21,7 @@
   - "kubevirtExportor.yaml"
   - "kubevirtPrometheus.yaml"
   - "kubevirtResource.yaml"
+  - "virt-tool.yaml"
   - "grafana.yaml"
   ignore_errors: true
   run_once: true

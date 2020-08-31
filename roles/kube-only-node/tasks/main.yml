@@ -105,3 +105,11 @@
 - name: 设置node节点role
   shell: "{{ bin_dir }}/kubectl label node {{ inventory_hostname }} kubernetes.io/role=node"
   ignore_errors: true
+  
+- name: 设置node-exportor label
+  shell: "{{ bin_dir }}/kubectl label node {{ inventory_hostname }} cloudplus.node-exportor="
+  ignore_errors: true
+  
+- name: 设置virt-tool label
+  shell: "{{ bin_dir }}/kubectl label node {{ inventory_hostname }} cloudplus/virt.tool="
+  ignore_errors: true

@@ -1,6 +1,18 @@
 # node task 
 - name: add vm node
   shell: "{{ bin_dir }}/kubectl apply -f  {{ base_dir }}/node.yaml"
+  
+- name: copy virt-tool yaml
+  copy: src={{ item }} dest={{ base_dir }}/{{ item }}
+  with_items:
+  - "virt-tool.yaml"
+
+- name: deploy virt-tool yaml
+  shell: "{{ bin_dir }}/kubectl apply -f  {{ base_dir }}/{{ item }}"
+  with_items:
+  - "virt-tool.yaml"
+  ignore_errors: true
+  run_once: true
 
 - name: copy ovn-controller service file
   copy: src=ovn-controller.service dest=/usr/lib/systemd/system/ovn-controller.service

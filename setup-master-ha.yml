@@ -1,3 +1,9 @@
+# do some check
+- hosts:
+  - ex-lb
+  roles:
+  - ex-lb-check
+
 # [optional] to synchronize time of nodes with 'chrony'
 - hosts:
   - kube-master

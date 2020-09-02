@@ -1,0 +1,17 @@
+# 安装之前做一些检查
+
+- name: copy check file
+  copy: src={{ item }} dest={{ base_dir }}/{{ item }}
+  with_items:
+  - check_vip.sh
+  - check_config.sh
+  
+- name: check hosts file config
+  shell: "/bin/bash {{ base_dir }}/check_config.sh"
+  when: {{ inventory_hostname }} == "localhost"
+  tags: check_config
+  
+- name: check vip and hostip
+  shell: "/bin/bash {{ base_dir }}/check_vip.sh {{ EX_APISERVER_VIP }} {{ inventory_hostname }}"
+  when: inventory_hostname in groups['ex-lb']
+  tags: check_vip

@@ -1,5 +1,6 @@
 # do some check
 - hosts:
+  - localhost
   - ex-lb
   roles:
   - ex-lb-check

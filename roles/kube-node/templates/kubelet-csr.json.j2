@@ -1,8 +1,9 @@
 {
-  "CN": "system:node:{{ inventory_hostname }}",
+  "CN": "system:node:{{ ansible_hostname }}",
   "hosts": [
     "127.0.0.1",
-    "{{ inventory_hostname }}"
+    "{{ inventory_hostname }}",
+    "{{ ansible_hostname }}"
   ],
   "key": {
     "algo": "rsa",

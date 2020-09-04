@@ -23,6 +23,9 @@ spec:
         - 'virtctl-update-stuff.sh'
         imagePullPolicy: IfNotPresent
         name: virtctl
+        securityContext:
+          privileged: true
+          runAsUser: 0
         volumeMounts:
           - name: etc
             mountPath: /etc/
@@ -58,6 +61,9 @@ spec:
         - 'virtlet-update-stuff.sh'
         imagePullPolicy: IfNotPresent
         name: virtlet
+        securityContext:
+          privileged: true
+          runAsUser: 0
         volumeMounts:
           - name: etc
             mountPath: /etc/

@@ -6,6 +6,7 @@
     "{{ hostvars[groups['ex-lb'][0]]['EX_APISERVER_VIP'] }}",
 {% endif %}
     "{{ inventory_hostname }}",
+    "{{ ansible_hostname }}",
     "{{ CLUSTER_KUBERNETES_SVC_IP }}",
 {% for host in MASTER_CERT_HOSTS %}
     "{{ host }}",

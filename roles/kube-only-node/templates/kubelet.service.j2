@@ -33,7 +33,7 @@ ExecStart={{ bin_dir }}/kubelet \
   --container-runtime=remote \
   --container-runtime-endpoint=unix:///run/containerd/containerd.sock \
 {% endif %}
-  --hostname-override={{ inventory_hostname }} \
+  --hostname-override={{ ansible_hostname }} \
   --kubeconfig=/etc/kubernetes/kubelet.kubeconfig \
   --network-plugin=cni \
   --pod-infra-container-image={{ SANDBOX_IMAGE }} \

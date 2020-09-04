@@ -95,7 +95,7 @@
   tags: reload-kube-proxy, upgrade_k8s, restart_node
 
 - name: 轮询等待node达到Ready状态
-  shell: "{{ bin_dir }}/kubectl get node {{ inventory_hostname }}|awk 'NR>1{print $2}'"
+  shell: "{{ bin_dir }}/kubectl get node {{ ansible_hostname }}|awk 'NR>1{print $2}'"
   register: node_status
   until: node_status.stdout == "Ready" or node_status.stdout == "Ready,SchedulingDisabled"
   retries: 8 
@@ -103,13 +103,13 @@
   tags: upgrade_k8s, restart_node
 
 - name: 设置node节点role
-  shell: "{{ bin_dir }}/kubectl label node {{ inventory_hostname }} kubernetes.io/role=node"
+  shell: "{{ bin_dir }}/kubectl label node {{ ansible_hostname }} kubernetes.io/role=node --overwrite"
   ignore_errors: true
-  
+
 - name: 设置node-exportor label
-  shell: "{{ bin_dir }}/kubectl label node {{ inventory_hostname }} cloudplus/node.exportor="
+  shell: "{{ bin_dir }}/kubectl label node {{ ansible_hostname }} cloudplus/node.exportor= --overwrite"
   ignore_errors: true
-  
+
 - name: 设置virt-tool label
-  shell: "{{ bin_dir }}/kubectl label node {{ inventory_hostname }} cloudplus/virt.tool="
+  shell: "{{ bin_dir }}/kubectl label node {{ ansible_hostname }} cloudplus/virt.tool= --overwrite"
   ignore_errors: true

@@ -103,7 +103,7 @@
   tags: upgrade_k8s, restart_node
 
 - name: 设置node节点role
-  shell: "{{ bin_dir }}/kubectl label node {{ ansible_hostname }} kubernetes.io/role=node --overwrite"
+  shell: "{{ bin_dir }}/kubectl label node {{ ansible_hostname }} kubernetes.io/role=node"
   ignore_errors: true
 
 - name: 设置node-exportor label

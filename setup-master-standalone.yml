@@ -30,11 +30,11 @@
   - kube-node
   tasks:
   - name: Setting master role name
-    shell: "{{ bin_dir }}/kubectl label node {{ inventory_hostname }} kubernetes.io/role=master --overwrite"
+    shell: "{{ bin_dir }}/kubectl label node {{ ansible_hostname }} kubernetes.io/role=master --overwrite"
     ignore_errors: true
 
   - name: Setting master compatible label
-    shell: "{{ bin_dir }}/kubectl label node {{ inventory_hostname }} node-role.kubernetes.io/master= --overwrite"
+    shell: "{{ bin_dir }}/kubectl label node {{ ansible_hostname }} node-role.kubernetes.io/master= --overwrite"
     ignore_errors: true
 
 # to install network plugin, only one can be choosen

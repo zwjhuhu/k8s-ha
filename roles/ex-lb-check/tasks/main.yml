@@ -4,10 +4,9 @@
   copy: src={{ item }} dest={{ base_dir }}/{{ item }}
   with_items:
   - check_vip.sh
-  - check_config.sh
   
 - name: check hosts file config
-  shell: "/bin/bash {{ base_dir }}/check_config.sh"
+  shell: "/bin/bash {{ base_dir }}/roles/ex-lb-check/files/check_config.sh"
   when: "inventory_hostname  == 'localhost'"
   tags: check_config
   

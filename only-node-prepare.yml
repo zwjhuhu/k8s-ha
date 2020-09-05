@@ -1,5 +1,0 @@
-# prepare tasks for only node
-- hosts:
-  - kube-node
-  roles:
-  - prepare

@@ -46,8 +46,8 @@
   shell: "systemctl daemon-reload"
   tags: restart_ovn
 
-- name: start openvswitch service
-  service: name=openvswitch enabled=yes state=started
+- name: restart openvswitch service
+  service: name=openvswitch enabled=yes state=restarted
   tags: restart_ovn
 
 - name: restart ovn-ovsdb service

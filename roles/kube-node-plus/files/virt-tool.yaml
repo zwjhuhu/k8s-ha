@@ -24,8 +24,12 @@ spec:
         imagePullPolicy: IfNotPresent
         name: virtctl
         securityContext:
-          privileged: true
           runAsUser: 0
+          privileged: true
+          allowPrivilegeEscalation: true
+          capabilities:
+            add: 
+            - SYS_TIME
         volumeMounts:
           - name: etc
             mountPath: /etc/
@@ -62,8 +66,12 @@ spec:
         imagePullPolicy: IfNotPresent
         name: virtlet
         securityContext:
-          privileged: true
           runAsUser: 0
+          privileged: true
+          allowPrivilegeEscalation: true
+          capabilities:
+            add: 
+            - SYS_TIME
         volumeMounts:
           - name: etc
             mountPath: /etc/

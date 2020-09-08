@@ -8,7 +8,11 @@
   ignore_errors: true
   
 - name: delete br-int 
-  shell: "ovs-vsctl --if-exists del-br br-int"
+  shell: "ovs-vsctl --if-exist del-br br-int"
+  ignore_errors: true
+  
+- name: clear node pools ovs bridges
+  shell: "/bin/bash {{ base_dir }}/roles/clean/files/clearnode.sh"
   ignore_errors: true
 
 - name: remove files 'kube-node-plus'
@@ -28,3 +32,5 @@
 - name: stop host-agent
   shell: "[ -x /usr/sbin/host-agent-ctl ] && /usr/sbin/host-agent-ctl stop"
   ignore_errors: true
+  
+

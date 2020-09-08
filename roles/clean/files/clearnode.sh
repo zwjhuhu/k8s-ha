@@ -38,4 +38,8 @@ do
 	  break
 	fi
   done
+  echo $i | grep -q -E "^vx.*$"
+  if [ $? -eq 0 ];then
+    ovs-vsctl --if-exist del-br $i
+  fi
 done

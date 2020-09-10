@@ -11,8 +11,13 @@
   shell: "ovs-vsctl --if-exist del-br br-int"
   ignore_errors: true
   
+- name: copy clear script
+  copy: src={{ item }} dest={{ base_dir }}/{{ item }} mode=0777
+  with_items:
+  - clearnode.sh
+
 - name: clear node pools ovs bridges
-  shell: "/bin/bash {{ base_dir }}/roles/clean/files/clearnode.sh"
+  shell: "/bin/bash {{ base_dir }}/clearnode.sh"
   ignore_errors: true
 
 - name: remove files 'kube-node-plus'

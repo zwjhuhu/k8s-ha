@@ -11,14 +11,22 @@ rules:
       - services
       - endpoints
       - pods
+      - ingresses
     verbs:
       - get
       - watch
       - list
   - apiGroups:
+      - ""
+    resources:
+      - configmaps
+    verbs:
+      - get
+  - apiGroups:
       - extensions
     resources:
       - ingresses
+      - ingresses/status
     verbs:
       - get
       - watch

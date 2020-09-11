@@ -13,6 +13,14 @@
   - "virt-tool.yaml"
   - "grafana.yaml"
 
+- name: prepare grafana dir
+  file: name=/opt/cz-cloud/grafana/data state=directory mode=777
+  
+- name: copy grafana.db
+  copy: src={{ item }} dest=/opt/cz-cloud/grafana/data/{{ item }} mode=0777
+  with_items:
+  - "grafana.db"
+
 - name: deploy kubernetes custom resources
   shell: "{{ bin_dir }}/kubectl apply -f  {{ base_dir }}/{{ item }}"
   with_items:

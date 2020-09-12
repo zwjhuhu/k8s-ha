@@ -11,6 +11,10 @@
 
 - import_tasks: node.yml
   when: "inventory_hostname in groups['kube-node'] and inventory_hostname not in groups['kube-master']" 
+  
+- name: create prometheus ip label
+  shell: "{{ bin_dir }}/kubectl label node {{ ansible_hostname }} prometheus.ip={{ inventory_hostname }} --overwrite"
+  ignore_errors: true
 
 - name: kubectl 软链接
   file: src={{ bin_dir }}/kubectl dest=/usr/bin/kubectl state=link

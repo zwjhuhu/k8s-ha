@@ -36,6 +36,11 @@
   - name: Setting master compatible label
     shell: "{{ bin_dir }}/kubectl label node {{ ansible_hostname }} node-role.kubernetes.io/master= --overwrite"
     ignore_errors: true
+    
+  # for acquire master ha connect ip 
+  - name: Setting master ha ip label
+    shell: "{{ bin_dir }}/kubectl label node {{ ansible_hostname }} master.ha.ip={{ inventory_hostname }} --overwrite"
+    ignore_errors: true
 
 # to install network plugin, only one can be choosen
 - hosts:

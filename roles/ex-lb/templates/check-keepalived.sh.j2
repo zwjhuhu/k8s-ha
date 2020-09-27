@@ -1,0 +1,44 @@
+nic="{{ LB_IF }}"
+vip="{{ EX_APISERVER_VIP }}"
+logfile=/var/log/check-keepalived.log
+
+echo "" > $logfile
+
+log_to_file(){
+  echo "$(date '+%Y/%m/%d %H:%M:%S') $1" >> $logfile
+}
+
+try_start_keepalived(){
+  systemctl status keepalived | grep -q "active (running)"
+  if [ $? -ne 0 ];then
+    log_to_file "$nic up will start keepalived service"
+    systemctl start keepalived &>/dev/null
+  fi
+}
+
+try_up_and_stop_keepalvied(){
+  nic=$1
+  ip link set $nic up &>/dev/null
+  sleep 1
+  st=`cat /sys/class/net/${nic}/operstate`
+  if [ "$st" == "down" ];then
+    systemctl status keepalived | grep -q "active (running)"
+    if [ $? -eq 0 ];then
+      log_to_file "$nic still down will stop keepalived"
+      systemctl stop keepalived &>/dev/null
+	  vipcidr=`ip a | grep inet | grep "${vip}/" | awk '{print $2}'`
+	  [ -n $vipcidr ] && ip a del $vipcidr dev $nic &>/dev/null && log_to_file "delete $vipcidr from $nic"
+    fi
+  fi
+}
+
+while true
+do
+  st=`cat /sys/class/net/${nic}/operstate`
+  if [ "$st" == "down" ];then
+    try_up_and_stop_keepalvied $nic  
+  else
+    try_start_keepalived
+  fi
+  sleep 5
+done

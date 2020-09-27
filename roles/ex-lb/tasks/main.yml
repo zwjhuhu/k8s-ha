@@ -51,7 +51,7 @@
   when: 'ansible_distribution in ["CentOS","RedHat","Amazon"]'
   tags: restart_lb
   
-- name: copy ovn sh
+- name: copy check-keepalived.service
   copy: src={{ item }} dest=/usr/lib/systemd/system/{{ item }}
   with_items:
   - "check-keepalived.service"

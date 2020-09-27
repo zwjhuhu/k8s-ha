@@ -30,7 +30,7 @@ while true
 do
   st=`cat /sys/class/net/${nic}/operstate`
   if [ "$st" == "down" ];then
-    stop_keepalvied $nic  
+    stop_keepalvied
   else
     try_start_keepalived
   fi

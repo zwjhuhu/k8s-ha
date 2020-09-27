@@ -2,7 +2,7 @@
 
 ENCAP_IP=$1
 # if master and node in same host do nothing
-/opt/kube/bin/kubectl get node --show-labels | grep -q "master.ha.ip=192.168.96.118"
+/opt/kube/bin/kubectl get node --show-labels | grep -q "master.ha.ip=${ENCAP_IP}"
 if [ $? -eq 0 ];then
   exit 0
 fi

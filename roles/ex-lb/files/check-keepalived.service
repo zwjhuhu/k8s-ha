@@ -1,7 +1,7 @@
 
 [Unit]
 Description = check-keepalived service
-After = After=network-online.target
+After = network-online.target
 
 [Service]
 Type = simple

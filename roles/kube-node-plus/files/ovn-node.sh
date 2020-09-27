@@ -1,6 +1,11 @@
 #!/bin/bash
 
 ENCAP_IP=$1
+# if master and node in same host do nothing
+/opt/kube/bin/kubectl get node --show-labels | grep -q "master.ha.ip=192.168.96.118"
+if [ $? -eq 0 ];then
+  exit 0
+fi
 OVS_SET="ovs-vsctl set open ."
 $OVS_SET external_ids:ovn-bridge=br-int
 $OVS_SET external_ids:ovn-encap-type=geneve

@@ -16,19 +16,13 @@ try_start_keepalived(){
   fi
 }
 
-try_up_and_stop_keepalvied(){
-  nic=$1
-  ip link set $nic up &>/dev/null
-  sleep 1
-  st=`cat /sys/class/net/${nic}/operstate`
-  if [ "$st" == "down" ];then
-    systemctl status keepalived | grep -q "active (running)"
-    if [ $? -eq 0 ];then
-      log_to_file "$nic still down will stop keepalived"
-      systemctl stop keepalived &>/dev/null
-	  vipcidr=`ip a | grep inet | grep "${vip}/" | awk '{print $2}'`
-	  [ -n $vipcidr ] && ip a del $vipcidr dev $nic &>/dev/null && log_to_file "delete $vipcidr from $nic"
-    fi
+stop_keepalvied(){
+  systemctl status keepalived | grep -q "active (running)"
+  if [ $? -eq 0 ];then
+    log_to_file "$nic down will stop keepalived"
+    systemctl stop keepalived &>/dev/null
+	vipcidr=`ip a | grep inet | grep "${vip}/" | awk '{print $2}'`
+	[ -n $vipcidr ] && ip a del $vipcidr dev $nic &>/dev/null && log_to_file "delete $vipcidr from $nic"
   fi
 }
 
@@ -36,7 +30,7 @@ while true
 do
   st=`cat /sys/class/net/${nic}/operstate`
   if [ "$st" == "down" ];then
-    try_up_and_stop_keepalvied $nic  
+    stop_keepalvied $nic  
   else
     try_start_keepalived
   fi

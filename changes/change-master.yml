@@ -58,3 +58,8 @@
   - kube-master
   roles:
   - kube-node-plus
+  
+# reinstall ex-lb
+- hosts: ex-lb
+  roles:
+  - ex-lb

@@ -101,6 +101,8 @@ spec:
             mountPath: /root/.kube/
           - name: tmp
             mountPath: /tmp/
+          - name: osrelease
+            mountPath: /usr/lib/os-release
       volumes: 
         - name: etc
           hostPath: 
@@ -144,6 +146,9 @@ spec:
         - name: tmp
           hostPath: 
             path: /tmp/
+        - name: osrelease
+          hostPath:
+            path: /usr/lib/os-release
       tolerations:
         - effect: NoSchedule
           operator: Exists

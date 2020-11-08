@@ -18,7 +18,6 @@ vrrp_instance VI-kube-master {
         {{ h }}
 {% endif %}{% endfor %}
     }
-    dont_track_primary
     interface {{ LB_IF }}
     virtual_router_id {{ ROUTER_ID }} 
     advert_int 3

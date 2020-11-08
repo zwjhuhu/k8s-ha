@@ -51,15 +51,6 @@
   when: 'ansible_distribution in ["CentOS","RedHat","Amazon"]'
   tags: restart_lb
   
-- name: copy check-keepalived.service
-  copy: src={{ item }} dest=/usr/lib/systemd/system/{{ item }}
-  with_items:
-  - "check-keepalived.service"
-  
-- name: check keepalived service
-  template: src=check-keepalived.sh.j2 dest=/usr/bin/check-keepalived.sh
-  tags: restart_lb
-  
 - name: daemon-reload
   shell: systemctl daemon-reload
   tags: restart_lb
@@ -72,18 +63,10 @@
   shell: systemctl restart haproxy
   tags: restart_lb
   
-- name: 重启check-keepalived服务
-  shell: systemctl restart check-keepalived
-  tags: restart_lb
-  
 - name: 开机启用haproxy服务
   shell: systemctl enable haproxy
   ignore_errors: true 
 
 - name: 开机启用keepalived服务
   shell: systemctl enable keepalived
-  ignore_errors: true
-
-- name: 开机启用check-keepalived服务
-  shell: systemctl enable check-keepalived
   ignore_errors: true

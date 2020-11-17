@@ -15,9 +15,14 @@ spec:
       labels:
         app: virt-tool
     spec:
+      tolerations:
+        - effect: NoSchedule
+          operator: Exists
+      nodeSelector:
+        cloudplus/virt.tool: ""
       hostNetwork: true
       containers:
-      - image: registry.cn-hangzhou.aliyuncs.com/cloudplus-lab/kubevirt-virtctl:v2.0.7
+      - image: registry.cn-hangzhou.aliyuncs.com/cloudplus-lab/kubevirt-virtctl:v2.0.9
         command: 
         - bash
         - 'virtctl-update-stuff.sh'
@@ -59,7 +64,9 @@ spec:
             mountPath: /root/.kube/
           - name: tmp
             mountPath: /tmp/
-      - image: registry.cn-hangzhou.aliyuncs.com/cloudplus-lab/kubevirt-virtlet:v2.0.7
+          - name: usrlib
+            mountPath: /usr/lib
+      - image: registry.cn-hangzhou.aliyuncs.com/cloudplus-lab/kubevirt-virtlet:v2.0.9
         command: 
         - bash
         - 'virtlet-update-stuff.sh'
@@ -101,8 +108,52 @@ spec:
             mountPath: /root/.kube/
           - name: tmp
             mountPath: /tmp/
-          - name: osrelease
-            mountPath: /usr/lib/os-release
+          - name: usrlib
+            mountPath: /usr/lib
+      - image: registry.cn-hangzhou.aliyuncs.com/cloudplus-lab/kubevirt-libvirtwatcher:v2.0.9
+        command: 
+        - bash
+        - 'watcher.sh'
+        imagePullPolicy: IfNotPresent
+        name: libvirtwatcher
+        securityContext:
+          runAsUser: 0
+          privileged: true
+          allowPrivilegeEscalation: true
+          capabilities:
+            add: 
+            - SYS_TIME
+        volumeMounts:
+          - name: etc
+            mountPath: /etc/
+          - name: dev
+            mountPath: /dev/
+          - name: opt
+            mountPath: /opt/
+          - name: varlog
+            mountPath: /var/log/
+          - name: libvirt
+            mountPath: /var/lib/libvirt/
+          - name: varrun
+            mountPath: /var/run/
+          - name: uit
+            mountPath: /uit/
+          - name: mnt
+            mountPath: /mnt/
+          - name: usrlib64
+            mountPath: /usr/lib64/
+          - name: usrbin
+            mountPath: /usr/bin/
+          - name: uraid
+            mountPath: /usr/lib/uraid
+          - name: usrshare
+            mountPath: /usr/share/
+          - name: kube
+            mountPath: /root/.kube/
+          - name: tmp
+            mountPath: /tmp/
+          - name: usrlib
+            mountPath: /usr/lib
       volumes: 
         - name: etc
           hostPath: 
@@ -146,11 +197,6 @@ spec:
         - name: tmp
           hostPath: 
             path: /tmp/
-        - name: osrelease
-          hostPath:
-            path: /usr/lib/os-release
-      tolerations:
-        - effect: NoSchedule
-          operator: Exists
-      nodeSelector: 
-        cloudplus/virt.tool: ""
+        - name: usrlib
+          hostPath: 
+            path: /usr/lib

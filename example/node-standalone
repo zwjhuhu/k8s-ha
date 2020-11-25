@@ -4,6 +4,7 @@
 
 # master node(s)
 [kube-master]
+#MASTERS#
 
 # work node(s)
 [kube-node]

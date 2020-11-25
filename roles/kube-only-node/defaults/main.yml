@@ -20,5 +20,14 @@ KUBE_RESERVED_ENABLED: "yes"
 # 另外，集群安装时候apiserver等资源占用会短时较大，建议至少预留1g内存
 SYS_RESERVED_ENABLED: "no"
 
+# haproxy balance mode 
+BALANCE_ALG: "roundrobin"
+
+# 增加/删除 master 节点时，node 节点需要重新配置 haproxy 等
+MASTER_CHG: "no"
+
+# 离线安装 haproxy 默认已经安装过了
+INSTALL_SOURCE: "custom"
+
 # 设置 APISERVER 地址
-KUBE_APISERVER: "https://192.168.96.120:8443"
+KUBE_APISERVER: "https://127.0.0.1:6443"

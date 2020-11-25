@@ -20,11 +20,11 @@
 - import_tasks: node_lb.yml
   when: "inventory_hostname not in groups['kube-master']"
 
-- name: 替换 kubeconfig 的 apiserver 地址
-  lineinfile:
-    dest: /root/.kube/config
-    regexp: "^    server"
-    line: "    server: {{ KUBE_APISERVER }}"
+#- name: 替换 kubeconfig 的 apiserver 地址
+#  lineinfile:
+#    dest: /root/.kube/config
+#    regexp: "^    server"
+#    line: "    server: {{ KUBE_APISERVER }}"
 
 ##----------kubelet 配置部分--------------
 # 创建 kubelet 相关证书及 kubelet.kubeconfig

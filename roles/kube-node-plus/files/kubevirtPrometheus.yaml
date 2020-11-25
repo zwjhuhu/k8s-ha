@@ -53,7 +53,7 @@ subjects:
     namespace: cloudplus
 roleRef:
   kind: ClusterRole
-  name: system:kubelet-api-admin
+  name: cluster-admin
   apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: v1

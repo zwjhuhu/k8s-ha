@@ -65,6 +65,8 @@
   ignore_errors: true
   tags: restart_ovn
   
+# 直接使用命令的原因是，ovn需要指定一个remote-addr，这个机器会执行ovn-sbctl init
+# 如果这个节点不是leader，这个命令会卡住，所以分开启动
 - name: start ovn-ovsdb leader service
   shell: "systemctl start ovn-ovsdb"
   when: 'inventory_hostname == OVN_LEADER'

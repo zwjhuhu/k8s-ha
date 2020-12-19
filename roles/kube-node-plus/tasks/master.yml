@@ -55,13 +55,18 @@
 - name: start openvswitch service
   service: name=openvswitch enabled=yes state=started
   tags: restart_ovn
+  
+- name: restart ovn-northd service
+  service: name=ovn-northd enabled=yes state=restarted
+  tags: restart_ovn
+  
+- name: wait leader
+  shell: "/usr/bin/sleep 10"
+  when: 'inventory_hostname != OVN_LEADER'
+  tags: restart_ovn
 
 - name: restart ovn-ovsdb service
   service: name=ovn-ovsdb enabled=yes state=restarted
-  tags: restart_ovn
-
-- name: restart ovn-northd service
-  service: name=ovn-northd enabled=yes state=restarted
   tags: restart_ovn
   
 - name: restart openvswitch service

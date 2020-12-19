@@ -52,25 +52,27 @@
   shell: "systemctl daemon-reload"
   tags: restart_ovn
 
-- name: start openvswitch service
-  service: name=openvswitch enabled=yes state=started
+- name: restart openvswitch service
+  service: name=openvswitch enabled=yes state=restarted
   tags: restart_ovn
-  
+
 - name: restart ovn-northd service
   service: name=ovn-northd enabled=yes state=restarted
   tags: restart_ovn
   
-- name: wait leader
-  shell: "/usr/bin/sleep 10"
-  when: 'inventory_hostname != OVN_LEADER'
-  tags: restart_ovn
-
-- name: restart ovn-ovsdb service
-  service: name=ovn-ovsdb enabled=yes state=restarted
+- name: stop ovn-ovsdb service
+  shell: "systemctl stop ovn-ovsdb;systemctl enable ovn-ovsdb"
+  ignore_errors: true
   tags: restart_ovn
   
-- name: restart openvswitch service
-  service: name=openvswitch enabled=yes state=restarted
+- name: start ovn-ovsdb leader service
+  shell: "systemctl start ovn-ovsdb"
+  when: 'inventory_hostname == OVN_LEADER'
+  tags: restart_ovn
+
+- name: wait leader
+  shell: "/usr/bin/sleep 10;systemctl start ovn-ovsdb"
+  when: 'inventory_hostname != OVN_LEADER'
   tags: restart_ovn
 
 - name: set ovn-contoller params

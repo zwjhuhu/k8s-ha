@@ -56,6 +56,8 @@ spec:
             mountPath: /usr/lib64/
           - name: usrbin
             mountPath: /usr/bin/
+          - name: usrsbin
+            mountPath: /usr/sbin/
           - name: uraid
             mountPath: /usr/lib/uraid
           - name: usrshare
@@ -100,6 +102,8 @@ spec:
             mountPath: /usr/lib64/
           - name: usrbin
             mountPath: /usr/bin/
+          - name: usrsbin
+            mountPath: /usr/sbin/
           - name: uraid
             mountPath: /usr/lib/uraid
           - name: usrshare
@@ -144,6 +148,8 @@ spec:
             mountPath: /usr/lib64/
           - name: usrbin
             mountPath: /usr/bin/
+          - name: usrsbin
+            mountPath: /usr/sbin/
           - name: uraid
             mountPath: /usr/lib/uraid
           - name: usrshare
@@ -185,6 +191,9 @@ spec:
         - name: usrbin
           hostPath: 
             path: /usr/bin/
+        - name: usrsbin
+          hostPath: 
+            path: /usr/sbin/
         - name: uraid
           hostPath: 
             path: /usr/lib/uraid

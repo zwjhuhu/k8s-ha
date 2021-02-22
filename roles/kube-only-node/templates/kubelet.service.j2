@@ -38,6 +38,7 @@ ExecStart={{ bin_dir }}/kubelet \
   --network-plugin=cni \
   --pod-infra-container-image={{ SANDBOX_IMAGE }} \
   --root-dir={{ KUBELET_ROOT_DIR }} \
+  --node-ip={{ inventory_hostname }} \
   --v=2
 Restart=always
 RestartSec=5

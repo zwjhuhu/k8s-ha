@@ -6,6 +6,7 @@ Wants=network-online.target
 Documentation=https://github.com/coreos
 
 [Service]
+Environment="ETCD_UNSUPPORTED_ARCH=arm64"
 Type=notify
 WorkingDirectory=/var/lib/etcd/
 ExecStart={{ bin_dir }}/etcd \

@@ -550,7 +550,7 @@ spec:
         fsGroup: 65534
       containers:
         - name: prometheus
-          image: prom/prometheus:latest
+          image: prom/prometheus-linux-arm64:v2.20.1
           imagePullPolicy: IfNotPresent
           args:
           - "--web.enable-lifecycle"

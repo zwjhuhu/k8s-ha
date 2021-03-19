@@ -48,8 +48,8 @@ spec:
             mountPath: /var/lib/libvirt/
           - name: varrun
             mountPath: /var/run/
-          - name: uit
-            mountPath: /uit/
+          - name: usrlocallib
+            mountPath: /usr/local/lib
           - name: mnt
             mountPath: /mnt/
           - name: usrlib64
@@ -92,8 +92,8 @@ spec:
             mountPath: /var/lib/libvirt/
           - name: varrun
             mountPath: /var/run/
-          - name: uit
-            mountPath: /uit/
+          - name: usrlocallib
+            mountPath: /usr/local/lib
           - name: mnt
             mountPath: /mnt/
           - name: usrlib64
@@ -136,8 +136,8 @@ spec:
             mountPath: /var/lib/libvirt/
           - name: varrun
             mountPath: /var/run/
-          - name: uit
-            mountPath: /uit/
+          - name: usrlocallib
+            mountPath: /usr/local/lib/
           - name: mnt
             mountPath: /mnt/
           - name: usrlib64
@@ -173,9 +173,9 @@ spec:
         - name: varrun
           hostPath: 
             path: /var/run/
-        - name: uit
+        - name: usrlocallib
           hostPath: 
-            path: /uit/
+            path: /usr/local/lib
         - name: mnt
           hostPath: 
             path: /mnt/

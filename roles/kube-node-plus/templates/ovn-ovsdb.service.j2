@@ -16,8 +16,8 @@
 [Unit]
 Description=OVN ovsdb daemon
 After=syslog.target
-Requires=openvswitch.service
-After=openvswitch.service
+Requires=openvswitch-switch.service
+After=openvswitch-switch.service
 
 [Service]
 Type=forking

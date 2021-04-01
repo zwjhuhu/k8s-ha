@@ -22,7 +22,7 @@ spec:
         cloudplus/virt.tool: ""
       hostNetwork: true
       containers:
-      - image: registry.cn-hangzhou.aliyuncs.com/cloudplus-lab/kubevirt-virtctl:v2.3.0
+      - image: virtctl:v2.3.0-arm64
         command: 
         - bash
         - 'virtctl-update-stuff.sh'
@@ -45,7 +45,7 @@ spec:
           - name: varlog
             mountPath: /var/log/
           - name: libvirt
-            mountPath: /var/lib/libvirt/
+            mountPath: /var/lib/
           - name: varrun
             mountPath: /var/run/
           - name: usrlocallib
@@ -66,7 +66,7 @@ spec:
             mountPath: /tmp/
           - name: usrlib
             mountPath: /usr/lib
-      - image: registry.cn-hangzhou.aliyuncs.com/cloudplus-lab/kubevirt-virtlet:v2.3.0
+      - image: virtlet:v2.3.0-arm64
         command: 
         - bash
         - 'virtlet-update-stuff.sh'
@@ -89,7 +89,7 @@ spec:
           - name: varlog
             mountPath: /var/log/
           - name: libvirt
-            mountPath: /var/lib/libvirt/
+            mountPath: /var/lib/
           - name: varrun
             mountPath: /var/run/
           - name: usrlocallib
@@ -110,7 +110,7 @@ spec:
             mountPath: /tmp/
           - name: usrlib
             mountPath: /usr/lib
-      - image: registry.cn-hangzhou.aliyuncs.com/cloudplus-lab/kubevirt-libvirtwatcher:v2.3.0
+      - image: libvirtwatcher:v2.3.0-arm64
         command: 
         - bash
         - 'watcher.sh'
@@ -133,7 +133,7 @@ spec:
           - name: varlog
             mountPath: /var/log/
           - name: libvirt
-            mountPath: /var/lib/libvirt/
+            mountPath: /var/lib/
           - name: varrun
             mountPath: /var/run/
           - name: usrlocallib
@@ -169,7 +169,7 @@ spec:
             path: /var/log/
         - name: libvirt
           hostPath: 
-            path: /var/lib/libvirt/
+            path: /var/lib/
         - name: varrun
           hostPath: 
             path: /var/run/

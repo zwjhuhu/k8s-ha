@@ -2,7 +2,7 @@
 CLUSTER_DNS_SVC_IP: "{{ SERVICE_CIDR | ipaddr('net') | ipaddr(2) | ipaddr('address') }}"
 
 # 基础容器镜像
-SANDBOX_IMAGE: "k8s.gcr.io/pause-arm64:3.2"
+SANDBOX_IMAGE: "pause-arm64:3.2"
 
 # Kubelet 根目录
 KUBELET_ROOT_DIR: "/var/lib/kubelet"
@@ -30,4 +30,4 @@ MASTER_CHG: "no"
 INSTALL_SOURCE: "custom"
 
 # 设置 APISERVER 地址
-KUBE_APISERVER: "https://127.0.0.1:6443"
+KUBE_APISERVER: "https://10.6.10.175:6443"

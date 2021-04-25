@@ -22,7 +22,7 @@ spec:
         cloudplus/virt.tool: ""
       hostNetwork: true
       containers:
-      - image: virtctl:v2.3.0-arm64
+      - image: virtctl:v2.3.0-kylin
         command: 
         - bash
         - 'virtctl-update-stuff.sh'
@@ -52,12 +52,16 @@ spec:
             mountPath: /usr/local/lib
           - name: mnt
             mountPath: /mnt/
-          - name: usrlib64
-            mountPath: /usr/lib64/
+          - name: bin
+            mountPath: /bin/
           - name: usrbin
             mountPath: /usr/bin/
-          - name: uraid
-            mountPath: /usr/lib/uraid
+          - name: sbin
+            mountPath: /sbin/
+          - name: usrsbin
+            mountPath: /usr/sbin/
+          - name: lib
+            mountPath: /lib
           - name: usrshare
             mountPath: /usr/share/
           - name: kube
@@ -66,7 +70,7 @@ spec:
             mountPath: /tmp/
           - name: usrlib
             mountPath: /usr/lib
-      - image: virtlet:v2.3.0-arm64
+      - image: virtlet:v2.3.0-kylin
         command: 
         - bash
         - 'virtlet-update-stuff.sh'
@@ -96,12 +100,16 @@ spec:
             mountPath: /usr/local/lib
           - name: mnt
             mountPath: /mnt/
-          - name: usrlib64
-            mountPath: /usr/lib64/
+          - name: bin
+            mountPath: /bin/
           - name: usrbin
             mountPath: /usr/bin/
-          - name: uraid
-            mountPath: /usr/lib/uraid
+          - name: sbin
+            mountPath: /sbin/
+          - name: usrsbin
+            mountPath: /usr/sbin/
+          - name: lib
+            mountPath: /lib
           - name: usrshare
             mountPath: /usr/share/
           - name: kube
@@ -110,7 +118,7 @@ spec:
             mountPath: /tmp/
           - name: usrlib
             mountPath: /usr/lib
-      - image: libvirtwatcher:v2.3.0-arm64
+      - image: libvirtwatcher:v2.3.0-kylin
         command: 
         - bash
         - 'watcher.sh'
@@ -140,12 +148,16 @@ spec:
             mountPath: /usr/local/lib/
           - name: mnt
             mountPath: /mnt/
-          - name: usrlib64
-            mountPath: /usr/lib64/
+          - name: bin
+            mountPath: /bin/
           - name: usrbin
             mountPath: /usr/bin/
-          - name: uraid
-            mountPath: /usr/lib/uraid
+          - name: sbin
+            mountPath: /sbin/
+          - name: usrsbin
+            mountPath: /usr/sbin/
+          - name: lib
+            mountPath: /lib
           - name: usrshare
             mountPath: /usr/share/
           - name: kube
@@ -179,15 +191,21 @@ spec:
         - name: mnt
           hostPath: 
             path: /mnt/
-        - name: usrlib64
+        - name: bin
           hostPath: 
-            path: /usr/lib64/
+            path: /bin/
         - name: usrbin
           hostPath: 
             path: /usr/bin/
-        - name: uraid
+        - name: sbin
           hostPath: 
-            path: /usr/lib/uraid
+            path: /sbin/
+        - name: usrsbin
+          hostPath: 
+            path: /usr/sbin/
+        - name: lib
+          hostPath: 
+            path: /lib/
         - name: usrshare
           hostPath: 
             path: /usr/share/

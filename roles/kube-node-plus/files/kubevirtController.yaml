@@ -28,7 +28,7 @@ spec:
         - java
         - -jar
         - kubevirt-controller-1.8.0.jar
-        image: registry.cn-hangzhou.aliyuncs.com/zwjhuhu/kubevirt-controller:1.8.0
+        image: kubevirt-controller:v1.8.0-arm64
         imagePullPolicy: IfNotPresent
         name: kubevirt-controller-manager
         resources: {}

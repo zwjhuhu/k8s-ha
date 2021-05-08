@@ -2,7 +2,7 @@
 CLUSTER_DNS_SVC_IP: "{{ SERVICE_CIDR | ipaddr('net') | ipaddr(2) | ipaddr('address') }}"
 
 # 基础容器镜像
-SANDBOX_IMAGE: "easzlab/pause-amd64:3.2"
+SANDBOX_IMAGE: "pause-arm64:3.2"
 
 # Kubelet 根目录
 KUBELET_ROOT_DIR: "/var/lib/kubelet"

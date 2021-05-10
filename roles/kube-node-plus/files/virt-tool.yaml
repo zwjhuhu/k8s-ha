@@ -58,8 +58,8 @@ spec:
             mountPath: /usr/bin/
           - name: usrsbin
             mountPath: /usr/sbin/
-          - name: uraid
-            mountPath: /usr/lib/uraid
+          - name: usrlibexec
+            mountPath: /usr/libexec/
           - name: usrshare
             mountPath: /usr/share/
           - name: kube
@@ -104,8 +104,8 @@ spec:
             mountPath: /usr/bin/
           - name: usrsbin
             mountPath: /usr/sbin/
-          - name: uraid
-            mountPath: /usr/lib/uraid
+          - name: usrlibexec
+            mountPath: /usr/libexec/
           - name: usrshare
             mountPath: /usr/share/
           - name: kube
@@ -150,8 +150,8 @@ spec:
             mountPath: /usr/bin/
           - name: usrsbin
             mountPath: /usr/sbin/
-          - name: uraid
-            mountPath: /usr/lib/uraid
+          - name: usrlibexec
+            mountPath: /usr/libexec/
           - name: usrshare
             mountPath: /usr/share/
           - name: kube
@@ -194,9 +194,9 @@ spec:
         - name: usrsbin
           hostPath: 
             path: /usr/sbin/
-        - name: uraid
+        - name: usrlibexec
           hostPath: 
-            path: /usr/lib/uraid
+            path: /usr/libexec/
         - name: usrshare
           hostPath: 
             path: /usr/share/

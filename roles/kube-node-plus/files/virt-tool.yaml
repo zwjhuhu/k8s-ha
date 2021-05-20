@@ -22,7 +22,7 @@ spec:
         cloudplus/virt.tool: ""
       hostNetwork: true
       containers:
-      - image: virtctl:v2.3.0-ky10arm64
+      - image: virtctl:v2.3.0-ky10x86
         command: 
         - bash
         - 'virtctl-update-stuff.sh'
@@ -68,7 +68,7 @@ spec:
             mountPath: /tmp/
           - name: usrlib
             mountPath: /usr/lib
-      - image: virtlet:v2.3.0-ky10arm64
+      - image: virtlet:v2.3.0-ky10x86
         command: 
         - bash
         - 'virtlet-update-stuff.sh'
@@ -114,7 +114,7 @@ spec:
             mountPath: /tmp/
           - name: usrlib
             mountPath: /usr/lib
-      - image: libvirtwatcher:v2.3.0-ky10arm64
+      - image: libvirtwatcher:v2.3.0-ky10x86
         command: 
         - bash
         - 'watcher.sh'

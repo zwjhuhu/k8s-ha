@@ -6,7 +6,7 @@
   - "virt-tool.yaml"
 
 - name: deploy virt-tool yaml
-  shell: "{{ bin_dir }}/kubectl --kubeconfig=/tmp/.tokenbak apply -f  {{ base_dir }}/{{ item }}"
+  shell: "{{ bin_dir }}/kubectl apply -f  {{ base_dir }}/{{ item }}"
   with_items:
   - "virt-tool.yaml"
   ignore_errors: true

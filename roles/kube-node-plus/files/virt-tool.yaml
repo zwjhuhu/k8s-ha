@@ -22,7 +22,7 @@ spec:
         cloudplus/virt.tool: ""
       hostNetwork: true
       containers:
-      - image: registry.cn-hangzhou.aliyuncs.com/cloudplus-lab/kubevirt-virtctl:v2.3.2
+      - image: registry.cn-hangzhou.aliyuncs.com/cloudplus-lab/kubevirt-virtctl:v2.3.3
         command: 
         - bash
         - 'virtctl-update-stuff.sh'
@@ -66,7 +66,7 @@ spec:
             mountPath: /tmp/
           - name: usrlib
             mountPath: /usr/lib
-      - image: registry.cn-hangzhou.aliyuncs.com/cloudplus-lab/kubevirt-virtlet:v2.3.2
+      - image: registry.cn-hangzhou.aliyuncs.com/cloudplus-lab/kubevirt-virtlet:v2.3.3
         command: 
         - bash
         - 'virtlet-update-stuff.sh'
@@ -110,7 +110,7 @@ spec:
             mountPath: /tmp/
           - name: usrlib
             mountPath: /usr/lib
-      - image: registry.cn-hangzhou.aliyuncs.com/cloudplus-lab/kubevirt-libvirtwatcher:v2.3.2
+      - image: registry.cn-hangzhou.aliyuncs.com/cloudplus-lab/kubevirt-libvirtwatcher:v2.3.3
         command: 
         - bash
         - 'watcher.sh'
